@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./api
+    image: anuragraj03/sentiment_api:latest
+    container_name: sentiment_api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./databases:/app/databases
+      - ./monitoring:/app/monitoring
+      - ./logs:/app/logs
+      - ./STEPS:/app/STEPS
+      - ./preprocess:/app/preprocess
+      - ./DATA:/app/DATA
+      - ./cicd:/app/cicd
+      - ./model_making:/app/model_making
+      - ./Save_model:/app/Save_model  
+    depends_on:
+      - monitoring
+      - mlflow
+    networks:
+      - sentiment_network  
+
+  frontend:
+    build: ./streamlit_app
+    image: anuragraj03/streamlit_app:latest
+    container_name: streamlit_app
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./databases:/app/databases
+      - ./logs:/app/logs
+    depends_on:
+      - backend
+    networks:
+      - sentiment_network  
+
+  monitoring:
+    build: ./monitoring
+    image: anuragraj03/monitoring_service:latest
+    container_name: monitoring_service 
+    volumes:
+      - ./databases:/app/databases
+      - ./logs:/app/logs
+      - ./monitoring:/app/monitoring
+      - ./STEPS:/app/STEPS
+      - ./preprocess:/app/preprocess
+      - ./DATA:/app/DATA
+      - ./cicd:/app/cicd
+      - ./model_making:/app/model_making
+      - ./Save_model:/app/Save_model  
+    environment:
+      - DATABASE_URL=sqlite:////app/databases/sentiment.db
+      - MLFLOW_TRACKING_URI=http://mlflow:5000  
+    depends_on:
+      - mlflow
+    networks:
+      - sentiment_network
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:latest
+    container_name: mlflow_tracking
+    restart: always
+    ports:
+      - "5000:5000"
+    command: mlflow server --host 0.0.0.0 --port 5000
+    networks:
+      - sentiment_network
+
+networks:
+  sentiment_network:
+    driver: bridge

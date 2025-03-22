@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: anuragraj03/streamlit_app:latest
+    container_name: streamlit_app
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./databases:/app/databases  
+      - ./logs:/app/logs 
+    depends_on:
+      - backend
+    networks:
+      - sentiment_network   
+
+networks:
+  sentiment_network:
+     driver: bridge

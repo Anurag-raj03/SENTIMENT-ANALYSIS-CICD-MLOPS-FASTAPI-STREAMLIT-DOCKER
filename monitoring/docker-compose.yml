@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  monitoring:
+    image: anuragraj03/monitoring_service:latest
+    container_name: monitoring_service
+    build: .
+    volumes:
+      - ./databases:/app/databases  
+      - ./logs:/app/logs
+      - ./monitoring:/app/monitoring
+      - ./STEPS:/app/STEPS
+      - ./preprocess:/app/preprocess
+      - ./DATA:/app/DATA
+      - ./cicd:/app/cicd
+      - ./model_making:/app/model_making
+      - ./Save_model:/app/Save_model
+    environment:
+      - DATABASE_URL=sqlite:////app/databases/sentiment.db
+      - MLFLOW_TRACKING_URI=http://mlflow:5000  
+    depends_on:
+      - mlflow  
+    networks:
+      - monitoring_network
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:latest
+    container_name: mlflow_tracking
+    restart: always
+    ports:
+      - "5000:5000" 
+    command: mlflow server --host 0.0.0.0 --port 5000
+    networks:
+      - monitoring_network
+
+networks:
+  monitoring_network:
+    driver: bridge

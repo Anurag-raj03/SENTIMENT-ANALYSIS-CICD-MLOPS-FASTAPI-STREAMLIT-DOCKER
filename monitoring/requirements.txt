@@ -1,0 +1,7 @@
+pandas
+numpy
+scikit-learn==1.4.0
+scipy
+mlflow
+joblib
+nltk

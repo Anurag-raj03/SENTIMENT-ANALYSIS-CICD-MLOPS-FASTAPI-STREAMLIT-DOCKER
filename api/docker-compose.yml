@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  backend:
+      image: anuragraj03/sentiment_api:latest
+      container_name: sentiment_api
+      build: .
+      ports:
+        - "8000:8000"
+      volumes:
+        - ./databases:/app/databases  
+        - ./logs:/app/logs
+        - ./monitoring:/app/monitoring
+        - ./STEPS:/app/STEPS
+        - ./preprocess:/app/preprocess
+        - ./DATA:/app/DATA
+        - ./cicd:/app/cicd
+        - ./model_making:/app/model_making
+        - ./Save_model:/app/Save_model
+      
+      networks:
+        - sentiment_network
+
+networks:
+  sentiment_network:
+     driver: bridge            
