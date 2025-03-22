@@ -29,9 +29,16 @@ jobs:
               password: ${{ secrets.DOCKER_PASSWORD }} 
 
          - name: Build and Push Docker Images Using Docker Compose
+          
            run: |
-             docker compose build
-             docker compose push
+              docker compose build
+              docker tag anuragraj03/sentiment_repo_cicd/sentiment_api:latest anuragraj03/sentiment_repo_cicd:sentiment_api
+              docker tag anuragraj03/sentiment_repo_cicd/monitoring_service:latest anuragraj03/sentiment_repo_cicd:monitoring_service
+              docker tag anuragraj03/sentiment_repo_cicd/streamlit_app:latest anuragraj03/sentiment_repo_cicd:streamlit_app
+              docker push anuragraj03/sentiment_repo_cicd:sentiment_api
+              docker push anuragraj03/sentiment_repo_cicd:monitoring_service
+              docker push anuragraj03/sentiment_repo_cicd:streamlit_app
+
 
          
              
