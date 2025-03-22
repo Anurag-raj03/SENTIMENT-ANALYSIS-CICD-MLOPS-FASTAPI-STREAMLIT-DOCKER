@@ -76,6 +76,7 @@ Sentiment_CICD/
 │   ├── removing_strip.py
 │   ├── stemming.py
 │   ├── tf_idf.py
+|__Saved_model
 │   ├── train_model/
 │   ├── vc_vectorizer.pkl
 │── STEPS/
@@ -89,10 +90,10 @@ Sentiment_CICD/
 │   ├── Dockerfile
 │   ├── requirements.txt
 │   ├── docker-compose.yml
-│   ├── after_space.co
-│   ├── docker_compose.yml
-│   ├── makeover
-│   ├── prediction.csv
+│── after_space.csv
+│── docker_compose.yml
+│── makeover.csv
+│── prediction.csv
 ```
 
 ---
