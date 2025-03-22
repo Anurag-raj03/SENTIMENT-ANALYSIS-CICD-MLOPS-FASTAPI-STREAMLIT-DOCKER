@@ -3,7 +3,7 @@ version: '3.8'
 services:
   backend:
     build: ./api
-    image: anuragraj03/sentiment_api:latest
+    image: anuragraj03/sentiment_repo_cicd/sentiment_api:latest
     container_name: sentiment_api
     restart: unless-stopped
     ports:
@@ -26,7 +26,7 @@ services:
 
   frontend:
     build: ./streamlit_app
-    image: anuragraj03/streamlit_app:latest
+    image: anuragraj03/sentiment_repo_cicd/streamlit_app:latest
     container_name: streamlit_app
     restart: unless-stopped
     ports:
@@ -41,7 +41,7 @@ services:
 
   monitoring:
     build: ./monitoring
-    image: anuragraj03/monitoring_service:latest
+    image: anuragraj03/sentiment_repo_cicd/monitoring_service:latest
     container_name: monitoring_service 
     volumes:
       - ./databases:/app/databases

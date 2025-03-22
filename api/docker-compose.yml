@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   backend:
-      image: anuragraj03/sentiment_api:latest
+      image: anuragraj03/sentiment_repo_cicd/sentiment_api:latest
       container_name: sentiment_api
       build: .
       ports:

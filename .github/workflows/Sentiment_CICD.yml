@@ -33,6 +33,6 @@ jobs:
              docker compose build
              docker compose push
 
-         - name: Pull Images (No Run)
-           run: |
-             docker compose pull
+         
+             
+             

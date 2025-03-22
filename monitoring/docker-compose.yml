@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   monitoring:
-    image: anuragraj03/monitoring_service:latest
+    image: anuragraj03/sentiment_repo_cicd/monitoring_service:latest
     container_name: monitoring_service
     build: .
     volumes:
