@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 def register_model():
     mlflow.set_tracking_uri("http://mlflow:5000")
-    experiment_name = "Sentiment__Analysis-CICD-FINAL"
+    experiment_name = "My_Sentiment__Analysis-CICD-FINAL"
     if not mlflow.get_experiment_by_name(experiment_name):
         experiment_id = mlflow.create_experiment(experiment_name)
         print(f"✅ Experiment '{experiment_name}' created with ID: {experiment_id}")

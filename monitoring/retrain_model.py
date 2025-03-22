@@ -22,7 +22,7 @@ from preprocess.dropping_na import drop_in
 from preprocess.resampl import balance_classes
 
 mlflow.set_tracking_uri("http://mlflow:5000")
-mlflow.set_experiment("Sentiment__Analysis-CICD-FINAL")
+mlflow.set_experiment("My_Sentiment__Analysis-CICD-FINAL")
 
 DATA_PATH = os.path.join("DATA", "data.csv")
 MODEL_DIR = "Save_model"

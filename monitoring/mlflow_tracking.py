@@ -11,7 +11,7 @@ def check_model_performance():
     model_path = "./Save_model/extra_trees.jbl"
     model = joblib.load(model_path)
 
-    experiment = mlflow.get_experiment_by_name("Sentiment__Analysis-CICD-FINAL")
+    experiment = mlflow.get_experiment_by_name("My_Sentiment__Analysis-CICD-FINAL")
     runs = mlflow.search_runs(experiment_ids=[experiment.experiment_id])
     if runs.empty:
         print("No previous runs found. Training a new model...")
